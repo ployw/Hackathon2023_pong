@@ -78,7 +78,7 @@ int main()
         }
 
         
-        ClearBackground(PURPLE);
+        ClearBackground(SKYBLUE);
         //draw center line
         DrawLine(screen_width / 2, 0, screen_width / 2, screen_height, WHITE);
         

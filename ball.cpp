@@ -1,8 +1,10 @@
 #include "ball.h"
 
+
+
 void Ball::drawBall()
 {
-    DrawCircle(xCoord, yCoord, ballRadius, WHITE); //maybe change color depending on user choice
+   DrawCircle(xCoord, yCoord, ballRadius, WHITE); //maybe change color depending on user choice
     
 }
 void Ball::update()

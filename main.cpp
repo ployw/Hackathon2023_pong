@@ -7,9 +7,11 @@
 #include "ball.cpp"
 #include "paddle.cpp"
 #include "cpuPaddle.cpp"
+#include <iostream>
 
 using namespace std;
 #define COLORS 5
+
 
 Ball ball;
 Paddle player;
@@ -26,10 +28,11 @@ int main()
     const int screen_height = 800;
 
     InitWindow(screen_width, screen_height, "Cat Pong");
+    
     SetTargetFPS(60);
 
-   // InitAudioDevice();
-   // Music music = LoadMusicStream("intense_music.mp3");
+    InitAudioDevice();
+    Music music = LoadMusicStream("intense_music.mp3");
     
 
     ball.ballRadius = 20; //size of ball
@@ -51,12 +54,14 @@ int main()
     bot.speed = 6;
     
     menu(); // mainMenu before playing
-    
+
+
     //game loop
     while(WindowShouldClose() == false)
     {
-        //UpdateMusicStream(music);
-        //PlayMusicStream(music);
+        SetMusicVolume(music, 0.25);
+        UpdateMusicStream(music);
+        PlayMusicStream(music);
         //creates canvas
         BeginDrawing();
         
@@ -84,7 +89,7 @@ int main()
         
         //user gets to choose what color they want to be, also maybe what color they want the ball
         //will be passed into the arguments when calling function
-
+ 
         ball.drawBall();
         bot.Draw();
         player.Draw();
@@ -95,6 +100,8 @@ int main()
         EndDrawing();
     }
 
+    UnloadMusicStream(music);
+    CloseAudioDevice();
     CloseWindow();
 
     return 0;

@@ -3,10 +3,13 @@
 
 #include <iostream>
 #include <raylib.h>
+#include <sstream>
 using namespace std;
 
 class Paddle
 {
+    private:
+        Color color;
     protected:
         void LimitMovement();
     public:
@@ -16,5 +19,6 @@ class Paddle
     
         void Draw();
         void updatePaddle();
+        Color GetUserColor(string);
 };
 #endif

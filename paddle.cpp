@@ -2,7 +2,8 @@
 
 void Paddle::Draw()
 {
-    DrawRectangle(xCoord, yCoord, width, height, WHITE);
+    DrawRectangleRounded(Rectangle{xCoord, yCoord, width, height}, 0.8, 0, WHITE);
+    //DrawRectangle(xCoord, yCoord, width, height, WHITE);
 }
 
 void Paddle::updatePaddle()
@@ -39,4 +40,23 @@ void Paddle::LimitMovement()
     {
         yCoord = GetScreenHeight() - height;
     }
+}
+Color Paddle::GetUserColor(string hexInput)
+{
+    // Prompt the user to enter a color in hexadecimal format
+    //cout << "Enter the color you want in hexadecimal format: ";
+    //displayColors();
+    //string hexInput = getInput<string>();
+
+    // Convert the hexadecimal input string to an integer
+    unsigned int hexValue;
+    stringstream ss;
+    ss << hex << hexInput;
+    ss >> hexValue;
+
+    // Create a Color object from the hexadecimal value using GetColor()
+    Color userColor = GetColor(hexValue);
+
+    // Return the color
+    return userColor;
 }

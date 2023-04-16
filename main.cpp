@@ -9,13 +9,12 @@
 #include "cpuPaddle.cpp"
 #include <iostream>
 #include <string>
-
 using namespace std;
-#define MAX_CHAR_INPUT 10
-#define COLORS 5
 
 
 typedef enum screen { TITLE = 0, OPTIONS, GAMEPLAY} screen;
+
+//Global Object variables
 Ball ball;
 Paddle player;
 cpuPaddle bot;
@@ -23,15 +22,10 @@ cpuPaddle bot;
 //initalizing colors
 Color Dark_Red = Color{168, 89, 89, 200};
 Color BGRed = Color{201, 153, 153, 200};
-Color Purple = Color{73, 88, 103, 255};
-Color Blue = Color{88, 107, 164, 255};
+Color Purple = Color{144, 50, 61, 255};
+Color Blue = Color{21, 30, 63, 255};
 Color Orange = Color{71, 45, 48, 255};
-Color Green = Color{172, 201, 172, 255};
-
-
-template <typename Type>
-Type getInput();
-bool paddleColorOption();
+Color Green = Color{224, 208, 193, 255};
 
 int main() 
 {
@@ -115,9 +109,7 @@ int main()
                 //allow player to set color of their paddle
                 if(IsKeyPressed(KEY_ONE))
                 {
-                    SetSoundVolume(bonk, 1);
-                    PlaySound(bonk);
-                    player.setColor(Purple); //red paddle 
+                    player.setColor(Purple); //purple paddle 
                     changeColorPaddle = true;
                 }
                 if(IsKeyPressed(KEY_TWO))
@@ -143,22 +135,22 @@ int main()
                 }
                 if(IsKeyPressed(KEY_FIVE))
                 {
-                    ball.setColor(Purple); //black ball
+                    ball.setColor(Purple); //purple ball
                     changeColorBall = true;
                 }
                 if(IsKeyPressed(KEY_SIX))
                 {
-                    ball.setColor(Blue); //magenta ball
+                    ball.setColor(Blue); //blue ball
                     changeColorBall = true;
                 }
                 if(IsKeyPressed(KEY_SEVEN))
                 {
-                    ball.setColor(Orange); //skyblue ball
+                    ball.setColor(Orange); //orange ball
                     changeColorBall = true;
                 }
                 if(IsKeyPressed(KEY_EIGHT))
                 {
-                    ball.setColor(Green); //lime ball
+                    ball.setColor(Green); //green ball
                     changeColorBall = true;
                 }
                
@@ -192,7 +184,6 @@ int main()
             } break;
         }
 
-    
         //rendering
         BeginDrawing();
         switch(currentScreen)
@@ -203,7 +194,8 @@ int main()
                 SetMusicVolume(title, 0.25);
                 UpdateMusicStream(title);
                 PlayMusicStream(title);
-            
+
+                //Title Screen
                 ClearBackground(BGRed);
                 DrawText("Hackathon 2023", 300, 120, 70, Dark_Red);
                 DrawText("PONG", 315, 200, 200, WHITE);
@@ -279,41 +271,9 @@ int main()
     UnloadMusicStream(title);
     UnloadMusicStream(music);
     UnloadSound(bonk);
-   // UnloadTexture(cat);
+   //UnloadTexture(cat);
     CloseAudioDevice();
     CloseWindow();
 
     return 0;
 }
-template <typename Type>
-Type getInput()
-{
-    Type input;
-    cin >> input;
-    return input;
-}
-// bool paddleColorOption()
-// {
-//     if(IsKeyPressed(KEY_ONE))
-//     {
-//         SetSoundVolume(bonk, 1);
-//         PlaySound(bonk);
-//         player.setColor(Purple); //red paddle 
-//         changeColorPaddle = true;
-//     }
-//         if(IsKeyPressed(KEY_TWO))
-//     {
-//     player.setColor(Blue); //blue paddle
-//     changeColorPaddle = true;
-//     }
-//     if(IsKeyPressed(KEY_THREE))
-//     {
-//     player.setColor(Orange); //orange paddle
-//     changeColorPaddle = true;
-//     }
-//     if(IsKeyPressed(KEY_FOUR))
-//     {
-//     player.setColor(Green); //green paddle
-//     changeColorPaddle = true;
-//     }
-// }

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <raylib.h>
-#include <sstream>
 using namespace std;
 
 class Paddle
@@ -19,6 +18,8 @@ class Paddle
     
         void Draw();
         void updatePaddle();
-        Color GetUserColor(string);
+
+        Color getColor() const;
+        void setColor(const Color);
 };
 #endif

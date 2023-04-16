@@ -18,7 +18,8 @@ void Ball::update()
     if(xCoord + ballRadius >= GetScreenWidth())
     {
         BeginDrawing();
-        DrawText("Computer Scored!", 290, 200, 70, WHITE); //display only for 1 second
+        DrawRectangle(0, 0, GetScreenWidth() / 2, GetScreenHeight(), (Color) {255, 255, 255, 100});
+        DrawText("Computer Scored!", 75, 200, 50, WHITE); //display only for 1 second
         cpuScore++;
         EndDrawing();
         sleep(1); // program paused for 1 second
@@ -29,7 +30,8 @@ void Ball::update()
     if(xCoord - ballRadius <= 0)
     {
         BeginDrawing();
-        DrawText("Player Scored!", 320, 200, 70, WHITE); //display only for 1 second
+        DrawRectangle(GetScreenWidth() / 2, 0, GetScreenWidth() / 2, GetScreenHeight(), (Color) {255, 255, 255, 100});
+        DrawText("Player Scored!", 715, 200, 50, WHITE); //display only for 1 second
         playerScore++;
         EndDrawing();
         sleep(1); // program paused for 1 second

@@ -20,12 +20,18 @@ Paddle player;
 cpuPaddle bot;
 
 //initalizing colors
-Color Dark_Red = Color{168, 89, 89, 200};
-Color BGRed = Color{201, 153, 153, 200};
+Color Dark_Red = Color{181, 89, 89,255};
+Color BGRed2 = Color{201, 143, 143, 255};
+Color BGRed1 = Color{201, 153, 153, 255};
+Color Light = Color{219, 186, 186, 100};
 Color Purple = Color{144, 50, 61, 255};
 Color Blue = Color{21, 30, 63, 255};
 Color Orange = Color{71, 45, 48, 255};
-Color Green = Color{224, 208, 193, 255};
+Color Cream = Color{230, 216, 204, 255};
+Color Cream2 = Color{237, 210, 185, 255};
+
+//play click sound
+void makeClick(Sound);
 
 int main() 
 {
@@ -51,6 +57,7 @@ int main()
     Music title = LoadMusicStream("resources/title.mp3");
     Music music = LoadMusicStream("resources/intense_music.mp3");
     Sound bonk = LoadSound("resources/bonk.mp3");
+    Sound click = LoadSound("resources/click.mp3");
     
     //initalizing
     ball.ballRadius = 20; //size of ball
@@ -86,6 +93,8 @@ int main()
             {
                 if (IsKeyPressed(KEY_ENTER))
                 {
+                    makeClick(click);
+                    
                     //if user didn't pick a color ---> set to default white
                     if(changeColorPaddle == false)
                     {
@@ -100,6 +109,7 @@ int main()
 
                 if(IsKeyPressed(KEY_O))
                 {
+                    makeClick(click);
                     currentScreen = OPTIONS;
                 }
             } break;
@@ -124,13 +134,14 @@ int main()
                 }
                 if(IsKeyPressed(KEY_FOUR))
                 {
-                    player.setColor(Green); //green paddle
+                    player.setColor(Cream); //green paddle
                     changeColorPaddle = true;
                 }
         
         
                 if(IsKeyPressed(KEY_Z))
                 {
+                    makeClick(click);
                     currentScreen = TITLE; //exit options
                 }
                 if(IsKeyPressed(KEY_FIVE))
@@ -150,7 +161,7 @@ int main()
                 }
                 if(IsKeyPressed(KEY_EIGHT))
                 {
-                    ball.setColor(Green); //green ball
+                    ball.setColor(Cream); //green ball
                     changeColorBall = true;
                 }
                
@@ -166,7 +177,7 @@ int main()
                 if(CheckCollisionCircleRec(Vector2{ball.xCoord, ball.yCoord}, ball.ballRadius, Rectangle{player.xCoord, player.yCoord, player.width, player.height}))
                 {
                     ball.xSpeed *= -1;
-                    SetSoundVolume(bonk, 0.25);
+                    SetSoundVolume(bonk, 0.2);
                     PlaySound(bonk); //collision sound
 
                 }
@@ -174,11 +185,12 @@ int main()
                 if(CheckCollisionCircleRec(Vector2{ball.xCoord, ball.yCoord}, ball.ballRadius, Rectangle{bot.xCoord, bot.yCoord, bot.width, bot.height}))
                 {
                     ball.xSpeed *= -1;
-                    SetSoundVolume(bonk, 0.25);
+                    SetSoundVolume(bonk, 0.2);
                     PlaySound(bonk);//collision sound
                 }
                 if(IsKeyPressed(KEY_Z))
                 {
+                    makeClick(click);
                     currentScreen = TITLE;
                 }
             } break;
@@ -191,17 +203,18 @@ int main()
             case TITLE:
             {
                 //play title music
-                SetMusicVolume(title, 0.25);
+                SetMusicVolume(title, 0.15);
                 UpdateMusicStream(title);
                 PlayMusicStream(title);
 
                 //Title Screen
-                ClearBackground(BGRed);
-                DrawText("Hackathon 2023", 300, 120, 70, Dark_Red);
-                DrawText("PONG", 315, 200, 200, WHITE);
-                DrawText("by Angelo Calingo, Josh Matni, Ploy Wandeevong", 340, 400, 20, WHITE);
-                DrawText("press 'enter' to play!", 315, 600, 50, WHITE);
-                DrawText("press 'o' for customization options!", 320, 675, 30, WHITE);
+                ClearBackground(BGRed1);
+                DrawRectangle(0, 200, screen_width, 180, (Color) {255, 255, 255, 50});
+                DrawText("Hackathon 2023", 305, 120, 70, Dark_Red);
+                DrawText("PONG", 320, 200, 200, WHITE);
+                DrawText("by Angelo Calingo, Josh Matni, Ploy Wandeevong", 345, 400, 20, WHITE);
+                DrawText("press 'enter' to play!", 320, 600, 50, WHITE);
+                DrawText("press 'o' for customization options!", 325, 675, 30, WHITE);
             
                 //DrawTexture(cat, 200, 400, WHITE);
             break;
@@ -213,10 +226,10 @@ int main()
                 UpdateMusicStream(title);
                 PlayMusicStream(title);
 
-                ClearBackground(BGRed);
-
+                ClearBackground(BGRed1);
+                DrawRectangle(50, 50, screen_width - 100, screen_height - 100, (Color) {255, 255, 255, 50});
                 //customize paddle
-                DrawText("customize your paddle color!", 210, 60, 50, WHITE);
+                DrawText("paddle color:", 440, 70, 50, WHITE);
                 DrawText("1", 440, 150, 40, WHITE);
                 DrawText("2", 540, 150, 40, WHITE);
                 DrawText("3", 640, 150, 40, WHITE);
@@ -224,10 +237,10 @@ int main()
                 DrawCircle(450, 250, 40, Purple);
                 DrawCircle(550, 250, 40, Blue);
                 DrawCircle(650, 250, 40, Orange);
-                DrawCircle(750, 250, 40, Green);
+                DrawCircle(750, 250, 40, Cream);
 
                 //customize ball
-                DrawText("customize your ping pong ball color!", 130, 350, 50, WHITE);
+                DrawText("ping pong ball color:", 350, 350, 50, WHITE);
                 DrawText("5", 440, 425, 40, WHITE);
                 DrawText("6", 540, 425, 40, WHITE);
                 DrawText("7", 640, 425, 40, WHITE);
@@ -235,9 +248,9 @@ int main()
                 DrawCircle(450, 525, 40, Purple);
                 DrawCircle(550, 525, 40, Blue);
                 DrawCircle(650, 525, 40, Orange);
-                DrawCircle(750, 525, 40, Green);
+                DrawCircle(750, 525, 40, Cream);
 
-                DrawText("(press z to go back)", 380, 700, 40, WHITE);
+                DrawText("(press z to go back)", 445, 700, 30, WHITE);
             } break;
             
             case GAMEPLAY:
@@ -248,12 +261,12 @@ int main()
                 PlayMusicStream(music);
                 
                 //background colors and middle line
-                ClearBackground(Dark_Red);
-                DrawRectangle(screen_width / 2, 0, screen_width / 2, screen_height, BGRed);
+                ClearBackground(BGRed2);
+                DrawRectangle(screen_width / 2, 0, screen_width / 2, screen_height, BGRed1);
+                DrawCircle(screen_width / 2, screen_height / 2, 200, Light);
                 DrawLine(screen_width / 2, 0, screen_width / 2, screen_height, WHITE);
-                DrawText("press z to exit", 10, 10, 20, WHITE);
-                
-            
+                DrawText("press z to return", 10, 10, 20, WHITE);
+
                 //drawing all the assets
                 ball.drawBall();
                 bot.setColor(WHITE);
@@ -271,9 +284,16 @@ int main()
     UnloadMusicStream(title);
     UnloadMusicStream(music);
     UnloadSound(bonk);
+    UnloadSound(click);
    //UnloadTexture(cat);
     CloseAudioDevice();
     CloseWindow();
 
     return 0;
+}
+
+void makeClick(Sound click)
+{
+    SetSoundVolume(click, 0.2);
+    PlaySound(click); 
 }

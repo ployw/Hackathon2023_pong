@@ -129,7 +129,7 @@ Color GetColor(unsigned int hexValue)
     string color;
     cout << "What color would you like your paddle to be?" << endl;
     cin >> color;
-    return Color(color);
+    //return Color(color);
     cout << "Here is the list of colors!" << endl;
     
 }

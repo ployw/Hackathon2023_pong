@@ -3,7 +3,7 @@
 
 ## Authors: Ploy Wandeevong, Josh Matni, Angelo Calingo
 
-## Team Name: Sara Davis Fan Club
+Team Name: Sara Davis Fan Club
 
 1st place received and a $400 prize
 
